@@ -11,9 +11,9 @@ import (
 	"github.com/tomdewildt/advent-of-code-2020/pkg/input"
 )
 
-// AddCommandTo is used to add the command that exectutes the solve function to
+// AddCommandTo is used to add the command that exectutes the Solve function to
 // the main command. This function is also used to load the challenge input. This
-// function takes the root command as an input. The result of the solve function
+// function takes the root command as an input. The result of the Solve function
 // will be printed to stdout.
 func AddCommandTo(cmd *cobra.Command) {
 	cli.NewSubCommand(cmd, "1", func(cmd *cobra.Command, args []string) {
@@ -22,7 +22,7 @@ func AddCommandTo(cmd *cobra.Command) {
 			log.Fatalf("cannot load: %v", err)
 		}
 
-		solution1, solution2, err := solve(stream)
+		solution1, solution2, err := Solve(stream)
 		if err != nil {
 			log.Fatalf("cannot solve: %v", err)
 		}
@@ -32,7 +32,10 @@ func AddCommandTo(cmd *cobra.Command) {
 	})
 }
 
-func solve(stream io.Reader) (int, int, error) {
+// Solve is used to find the solution to the problem. This function takes an stream
+// of type io.Reader as input. It returns two integers and nil or 0, 0 and an error
+// if one occurred.
+func Solve(stream io.Reader) (int, int, error) {
 	input, err := input.ToIntSlice(stream)
 	if err != nil {
 		return 0, 0, err
