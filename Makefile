@@ -5,8 +5,8 @@ NAMESPACE := tomdewildt
 NAME := advent-of-code-2020
 
 CMD := cmd/advent-of-code-2020/advent-of-code-2020.go
-DAY := 0
-FILE := ./assets/day0/day0.txt
+DAY := 1
+FILE := ./assets/day1/day1.txt
 
 help: ## Show this help
 	@echo "${NAMESPACE}/${NAME}"
