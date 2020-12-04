@@ -4,6 +4,7 @@ import (
 	"os"
 
 	"github.com/tomdewildt/advent-of-code-2020/internal/day1"
+	"github.com/tomdewildt/advent-of-code-2020/internal/day2"
 	"github.com/tomdewildt/advent-of-code-2020/pkg/cli"
 )
 
@@ -17,6 +18,7 @@ func main() {
 	cmd := cli.NewRootCommand(Name, Version)
 
 	day1.AddCommandTo(cmd)
+	day2.AddCommandTo(cmd)
 
 	if err := cmd.Execute(); err != nil {
 		os.Exit(1)
