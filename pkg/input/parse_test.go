@@ -32,3 +32,12 @@ func TestToStringSlice(t *testing.T) {
 	assert.Equal(t, []string{"a", "b", "c"}, result, "Result should be [a,b,c]")
 	assert.Nil(t, err, "Error should be nil")
 }
+
+func TestToTileMap(t *testing.T) {
+	stream := FromLiteral(".#.\n#.#\n.#.\n")
+
+	result, err := ToTileMap(stream)
+
+	assert.Equal(t, [][]rune{{'.', '#', '.'}, {'#', '.', '#'}, {'.', '#', '.'}}, result, "Result should be [[.,#,.],[#,.,#],[.,#,.]]")
+	assert.Nil(t, err, "Error should be nil")
+}
