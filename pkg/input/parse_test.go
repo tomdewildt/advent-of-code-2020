@@ -12,7 +12,7 @@ func TestToIntSliceInvalidStream(t *testing.T) {
 	result, err := ToIntSlice(stream)
 
 	assert.Nil(t, result, "Result should be nil")
-	assert.Contains(t, err.Error(), "invalid syntax", "Error should contain invalid syntax")
+	assert.Contains(t, err.Error(), "invalid syntax", "Error should contain \"invalid syntax\"")
 }
 
 func TestToIntSlice(t *testing.T) {

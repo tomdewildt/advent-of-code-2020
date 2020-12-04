@@ -41,7 +41,7 @@ func TestFromFlagsFromFile(t *testing.T) {
 	flags.String("literal", "", "test input literal")
 
 	stream, err := FromFlags(flags, "file", "literal")
-	data, err := ioutil.ReadAll(stream)
+	data, _ := ioutil.ReadAll(stream)
 
 	assert.Equal(t, "", string(data), "Stream should be empty")
 	assert.Nil(t, err, "Error should be nil")
@@ -53,7 +53,7 @@ func TestFromFlagsFromLiteral(t *testing.T) {
 	flags.String("literal", "literal", "test input literal")
 
 	stream, err := FromFlags(flags, "file", "literal")
-	data, err := ioutil.ReadAll(stream)
+	data, _ := ioutil.ReadAll(stream)
 
 	assert.Equal(t, "literal", string(data), "Stream should be \"literal\"")
 	assert.Nil(t, err, "Error should be nil")
@@ -65,7 +65,7 @@ func TestFromFile(t *testing.T) {
 	defer func() { os.Remove(path) }()
 
 	stream, err := FromFile(path)
-	data, err := ioutil.ReadAll(stream)
+	data, _ := ioutil.ReadAll(stream)
 
 	assert.Equal(t, "", string(data), "Stream should be empty")
 	assert.Nil(t, err, "Error should be nil")
@@ -75,8 +75,7 @@ func TestFromLiteral(t *testing.T) {
 	text := "test"
 
 	stream := FromLiteral(text)
-	data, err := ioutil.ReadAll(stream)
+	data, _ := ioutil.ReadAll(stream)
 
 	assert.Equalf(t, text, string(data), "Stream should be \"%s\"", text)
-	assert.Nil(t, err, "Error should be nil")
 }
