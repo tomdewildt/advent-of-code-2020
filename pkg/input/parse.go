@@ -42,3 +42,19 @@ func ToStringSlice(stream io.Reader) ([]string, error) {
 
 	return result, scanner.Err()
 }
+
+// ToTileMap is used to convert an file into a 2d slice of runes. This function takes
+// an stream of type io.Reader as input. It returns an 2d slice of runes and nil or
+// nil and an error if one occurred.
+func ToTileMap(stream io.Reader) ([][]rune, error) {
+	scanner := bufio.NewScanner(stream)
+	scanner.Split(bufio.ScanLines)
+
+	var result [][]rune
+
+	for scanner.Scan() {
+		result = append(result, []rune(scanner.Text()))
+	}
+
+	return result, scanner.Err()
+}
