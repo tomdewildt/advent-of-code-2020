@@ -1,0 +1,33 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "advent-of-code-2020",
+            "type": "go",
+            "request": "launch",
+            "mode": "auto",
+            "program": "${workspaceFolder}/cmd/advent-of-code-2020/advent-of-code-2020.go",
+            "cwd": "${workspaceFolder}",
+            "env": {},
+            "args": [
+                "${input:day}",
+                "-f",
+                "${input:file}"
+            ]
+        }
+    ],
+    "inputs": [
+        {
+            "id": "day",
+            "type": "promptString",
+            "description": "Enter day",
+            "default": "1",
+        },
+        {
+            "id": "file",
+            "type": "promptString",
+            "description": "Enter file",
+            "default": "./assets/day1/day1.txt",
+        }
+    ]
+}
