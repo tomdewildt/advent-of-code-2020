@@ -11,7 +11,7 @@ import (
 // and nil or nil and an error if one occurred.
 func ToIntSlice(stream io.Reader) ([]int, error) {
 	scanner := bufio.NewScanner(stream)
-	scanner.Split(bufio.ScanWords)
+	scanner.Split(bufio.ScanLines)
 
 	var result []int
 
@@ -22,6 +22,22 @@ func ToIntSlice(stream io.Reader) ([]int, error) {
 		}
 
 		result = append(result, value)
+	}
+
+	return result, scanner.Err()
+}
+
+// ToStringSlice is used to convert an file into a slice of strings. This function
+// takes an stream of type io.Reader as input. It returns an slice of strings and
+// nil or nil and an error if one occurred.
+func ToStringSlice(stream io.Reader) ([]string, error) {
+	scanner := bufio.NewScanner(stream)
+	scanner.Split(bufio.ScanLines)
+
+	var result []string
+
+	for scanner.Scan() {
+		result = append(result, scanner.Text())
 	}
 
 	return result, scanner.Err()

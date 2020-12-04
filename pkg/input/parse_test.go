@@ -23,3 +23,12 @@ func TestToIntSlice(t *testing.T) {
 	assert.Equal(t, []int{1, 2, 3}, result, "Result should be [1,2,3]")
 	assert.Nil(t, err, "Error should be nil")
 }
+
+func TestToStringSlice(t *testing.T) {
+	stream := FromLiteral("a\nb\nc\n")
+
+	result, err := ToStringSlice(stream)
+
+	assert.Equal(t, []string{"a", "b", "c"}, result, "Result should be [a,b,c]")
+	assert.Nil(t, err, "Error should be nil")
+}
