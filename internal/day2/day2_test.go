@@ -4,12 +4,9 @@ import (
 	"testing"
 
 	"github.com/stretchr/testify/assert"
+
 	"github.com/tomdewildt/advent-of-code-2020/pkg/input"
 )
-
-func TestSolveInvalidStream(t *testing.T) {
-
-}
 
 func TestSolveInvalidMinCharacter(t *testing.T) {
 	stream := input.FromLiteral("a-3 a: abcde\n1-3 b: cdefg\n")
