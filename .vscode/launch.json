@@ -20,13 +20,13 @@
         {
             "id": "day",
             "type": "promptString",
-            "description": "Enter day",
+            "description": "Enter a day number.",
             "default": "1",
         },
         {
             "id": "file",
             "type": "promptString",
-            "description": "Enter file",
+            "description": "Enter a input file.",
             "default": "./assets/day1/day1.txt",
         }
     ]
