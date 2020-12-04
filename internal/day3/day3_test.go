@@ -4,6 +4,7 @@ import (
 	"testing"
 
 	"github.com/stretchr/testify/assert"
+
 	"github.com/tomdewildt/advent-of-code-2020/pkg/input"
 )
 

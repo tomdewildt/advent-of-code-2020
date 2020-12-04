@@ -15,8 +15,8 @@ func TestNewRootCommand(t *testing.T) {
 	cmd.SetOut(out)
 	cmd.SetArgs([]string{})
 
-	assert.Equal(t, "test", cmd.Use, "Use should be test")
-	assert.Equal(t, "0.0.0", cmd.Version, "Version should be 0.0.0")
+	assert.Equal(t, "test", cmd.Use, "Use should be \"test\"")
+	assert.Equal(t, "0.0.0", cmd.Version, "Version should be \"0.0.0\"")
 
 	err := cmd.Execute()
 
@@ -37,15 +37,15 @@ func TestNewSubCommandNoRequiredFlags(t *testing.T) {
 	cmd.SetOut(out)
 	cmd.SetArgs([]string{"cmd"})
 
-	assert.Equal(t, "test", cmd.Use, "Use should be test")
-	assert.Equal(t, "0.0.0", cmd.Version, "Version should be 0.0.0")
+	assert.Equal(t, "test", cmd.Use, "Use should be \"test\"")
+	assert.Equal(t, "0.0.0", cmd.Version, "Version should be \"0.0.0\"")
 
 	err := cmd.Execute()
 
 	assert.Nil(t, command, "Command should be nil")
 	assert.Nil(t, arguments, "Arguments should be nil")
-	assert.Contains(t, err.Error(), "file", "Error should contain file")
-	assert.Contains(t, err.Error(), "literal", "Error should contain literal")
+	assert.Contains(t, err.Error(), "file", "Error should contain \"file\"")
+	assert.Contains(t, err.Error(), "literal", "Error should contain \"file\"")
 }
 
 func TestNewSubCommand(t *testing.T) {
@@ -62,8 +62,8 @@ func TestNewSubCommand(t *testing.T) {
 	cmd.SetOut(out)
 	cmd.SetArgs([]string{"cmd", "-f", "/tmp/input.txt"})
 
-	assert.Equal(t, "test", cmd.Use, "Use should be test")
-	assert.Equal(t, "0.0.0", cmd.Version, "Version should be 0.0.0")
+	assert.Equal(t, "test", cmd.Use, "Use should be \"test\"")
+	assert.Equal(t, "0.0.0", cmd.Version, "Version should be \"0.0.0\"")
 
 	err := cmd.Execute()
 	file, _ := command.Flags().GetString("file")
