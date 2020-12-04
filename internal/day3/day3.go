@@ -46,7 +46,7 @@ func Solve(stream io.Reader) (int, int, error) {
 	count4 := traverseMap(input, 7, 1, '#')
 	count5 := traverseMap(input, 1, 2, '#')
 
-	return count2, count1 * count2 * count3 * count4 * count5, nil
+	return count2, (count1 * count2 * count3 * count4 * count5), nil
 }
 
 func traverseMap(input [][]rune, dx int, dy int, char rune) int {
