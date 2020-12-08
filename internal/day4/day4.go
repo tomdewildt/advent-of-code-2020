@@ -38,26 +38,21 @@ func AddCommandTo(cmd *cobra.Command) {
 // of type io.Reader as input. It returns two integers and nil or 0, 0 and an error
 // if one occurred.
 func Solve(stream io.Reader) (int, int, error) {
-	input, err := input.ToStringSlice(stream)
+	input, err := input.ToGroupedStringSlice(stream)
 	if err != nil {
 		return 0, 0, err
 	}
 
 	validCount := 0
 	strictlyValidCount := 0
-	currentPassport := passport{}
 	for _, line := range input {
-		currentPassport.parse(line)
+		passport := parse(line)
 
-		if line == "" || line == input[len(input)-1] {
-			if currentPassport.isValid() {
-				validCount++
-			}
-			if currentPassport.isStrictlyValid() {
-				strictlyValidCount++
-			}
-
-			currentPassport = passport{}
+		if passport.isValid() {
+			validCount++
+		}
+		if passport.isStrictlyValid() {
+			strictlyValidCount++
 		}
 	}
 
@@ -121,29 +116,31 @@ func (p passport) isStrictlyValid() bool {
 	return true
 }
 
-func (p *passport) parse(input string) {
-	fields := strings.Split(input, " ")
+func parse(input string) passport {
+	passport := passport{}
 
-	for _, field := range fields {
+	for _, field := range strings.Split(input, " ") {
 		pairs := strings.Split(field, ":")
 
 		switch pairs[0] {
 		case "byr":
-			p.byr = pairs[1]
+			passport.byr = pairs[1]
 		case "iyr":
-			p.iyr = pairs[1]
+			passport.iyr = pairs[1]
 		case "eyr":
-			p.eyr = pairs[1]
+			passport.eyr = pairs[1]
 		case "hgt":
-			p.hgt = pairs[1]
+			passport.hgt = pairs[1]
 		case "hcl":
-			p.hcl = pairs[1]
+			passport.hcl = pairs[1]
 		case "ecl":
-			p.ecl = pairs[1]
+			passport.ecl = pairs[1]
 		case "pid":
-			p.pid = pairs[1]
+			passport.pid = pairs[1]
 		case "cid":
-			p.cid = pairs[1]
+			passport.cid = pairs[1]
 		}
 	}
+
+	return passport
 }

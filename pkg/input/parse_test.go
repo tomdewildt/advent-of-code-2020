@@ -33,6 +33,15 @@ func TestToStringSlice(t *testing.T) {
 	assert.Nil(t, err, "Error should be nil")
 }
 
+func TestToGroupedStringSlice(t *testing.T) {
+	stream := FromLiteral("abc\ndef\n\nghi\njkl\n\nmno")
+
+	result, err := ToGroupedStringSlice(stream)
+
+	assert.Equal(t, []string{"abc def", "ghi jkl", "mno"}, result, "Result should be [abc def,ghi jkl,mno]")
+	assert.Nil(t, err, "Error should be nil")
+}
+
 func TestToTileMap(t *testing.T) {
 	stream := FromLiteral(".#.\n#.#\n.#.\n")
 
