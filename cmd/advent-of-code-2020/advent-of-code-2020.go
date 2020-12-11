@@ -4,6 +4,7 @@ import (
 	"os"
 
 	"github.com/tomdewildt/advent-of-code-2020/internal/day1"
+	"github.com/tomdewildt/advent-of-code-2020/internal/day10"
 	"github.com/tomdewildt/advent-of-code-2020/internal/day2"
 	"github.com/tomdewildt/advent-of-code-2020/internal/day3"
 	"github.com/tomdewildt/advent-of-code-2020/internal/day4"
@@ -33,6 +34,7 @@ func main() {
 	day7.AddCommandTo(cmd)
 	day8.AddCommandTo(cmd)
 	day9.AddCommandTo(cmd)
+	day10.AddCommandTo(cmd)
 
 	if err := cmd.Execute(); err != nil {
 		os.Exit(1)
