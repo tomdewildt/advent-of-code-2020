@@ -8,7 +8,7 @@ import (
 )
 
 // NewRootCommand is used to create a new instance of a cobra.Command. This function
-// takes an name, version as input. It returns an command of type cobra.Command.
+// takes a name and version as input. It returns a command of type cobra.Command.
 func NewRootCommand(name string, version string) *cobra.Command {
 	cmd := &cobra.Command{
 		Use:     name,
@@ -23,7 +23,7 @@ func NewRootCommand(name string, version string) *cobra.Command {
 }
 
 // NewSubCommand is used to add a new sub command to a cobra.Command. This function
-// takes an root command, name and run function as input. The run function will be
+// takes a root command, name and run function as input. The run function will be
 // invoked when the command is executed and all the flags pass validation.
 func NewSubCommand(root *cobra.Command, name string, run func(cmd *cobra.Command, args []string)) {
 	cmd := &cobra.Command{

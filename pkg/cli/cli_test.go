@@ -45,7 +45,7 @@ func TestNewSubCommandNoRequiredFlags(t *testing.T) {
 	assert.Nil(t, command, "Command should be nil")
 	assert.Nil(t, arguments, "Arguments should be nil")
 	assert.Contains(t, err.Error(), "file", "Error should contain \"file\"")
-	assert.Contains(t, err.Error(), "literal", "Error should contain \"file\"")
+	assert.Contains(t, err.Error(), "literal", "Error should contain \"literal\"")
 }
 
 func TestNewSubCommand(t *testing.T) {
