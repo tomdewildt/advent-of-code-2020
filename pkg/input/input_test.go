@@ -31,6 +31,18 @@ func TestFromFlagsInvalidLiteralFlag(t *testing.T) {
 	assert.Contains(t, err.Error(), "test", "Error should contain \"test\"")
 }
 
+func TestFromFlagsMissingFlags(t *testing.T) {
+	flags := pflag.NewFlagSet("test", pflag.ContinueOnError)
+	flags.String("file", "", "test input file")
+	flags.String("literal", "", "test input literal")
+
+	stream, err := FromFlags(flags, "file", "literal")
+
+	assert.Nil(t, stream, "Stream should be nil")
+	assert.Contains(t, err.Error(), "file", "Error should contain \"file\"")
+	assert.Contains(t, err.Error(), "literal", "Error should contain \"literal\"")
+}
+
 func TestFromFlagsFromFile(t *testing.T) {
 	path := "/tmp/input.txt"
 	os.Create(path)

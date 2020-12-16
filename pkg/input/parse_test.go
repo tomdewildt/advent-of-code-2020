@@ -6,6 +6,33 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
+func TestToIntInvalidStream(t *testing.T) {
+	stream := FromLiteral("a")
+
+	result, err := ToInt(stream)
+
+	assert.Equal(t, 0, result, "Result should be 0")
+	assert.Contains(t, err.Error(), "invalid syntax", "Error should contain \"invalid syntax\"")
+}
+
+func TestToInt(t *testing.T) {
+	stream := FromLiteral("123")
+
+	result, err := ToInt(stream)
+
+	assert.Equal(t, 123, result, "Result should be 123")
+	assert.Nil(t, err, "Error should be nil")
+}
+
+func TestToString(t *testing.T) {
+	stream := FromLiteral("abc")
+
+	result, err := ToString(stream)
+
+	assert.Equal(t, "abc", result, "Result should be \"abc\"")
+	assert.Nil(t, err, "Error should be nil")
+}
+
 func TestToIntSliceInvalidStream(t *testing.T) {
 	stream := FromLiteral("a\n2\n3\n")
 
