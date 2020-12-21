@@ -33,18 +33,19 @@ func AddCommandTo(cmd *cobra.Command) {
 	})
 }
 
-// Solve is used to find the solution to the problem. This function takes an stream
+// Solve is used to find the solution to the problem. This function takes a stream
 // of type io.Reader as input. It returns two integers and nil or 0, 0 and an error
 // if one occurred.
 func Solve(stream io.Reader) (int, int, error) {
-	input, err := input.ToStringSlice(stream)
+	rules, err := input.ToStringSlice(stream)
 	if err != nil {
 		return 0, 0, err
 	}
 
 	bags := map[bag]map[bag]int{}
-	for _, line := range input {
-		bag, contains, err := parse(line)
+	mine := bag{modifier: "shiny", color: "gold"}
+	for _, rule := range rules {
+		bag, contains, err := parse(rule)
 		if err != nil {
 			return 0, 0, err
 		}
@@ -55,12 +56,12 @@ func Solve(stream io.Reader) (int, int, error) {
 	containsCount := 0
 	requiredCount := 0
 	for current := range bags {
-		if contains(bags, current, bag{modifier: "shiny", color: "gold"}) {
+		if contains(bags, current, mine) {
 			containsCount++
 		}
 	}
 
-	requiredCount = required(bags, bag{modifier: "shiny", color: "gold"}) - 1
+	requiredCount = required(bags, mine) - 1
 
 	return containsCount, requiredCount, nil
 }
@@ -87,10 +88,7 @@ func parse(input string) (bag, map[bag]int, error) {
 	}
 
 	parts = strings.Split(parts[0], " ")
-	bag := bag{
-		modifier: parts[0],
-		color:    parts[1],
-	}
+	bag := bag{modifier: parts[0], color: parts[1]}
 
 	return bag, contains, nil
 }
