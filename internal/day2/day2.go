@@ -33,19 +33,19 @@ func AddCommandTo(cmd *cobra.Command) {
 	})
 }
 
-// Solve is used to find the solution to the problem. This function takes an stream
+// Solve is used to find the solution to the problem. This function takes a stream
 // of type io.Reader as input. It returns two integers and nil or 0, 0 and an error
 // if one occurred.
 func Solve(stream io.Reader) (int, int, error) {
-	input, err := input.ToStringSlice(stream)
+	database, err := input.ToStringSlice(stream)
 	if err != nil {
 		return 0, 0, err
 	}
 
 	validCount := 0
 	strictlyValidCount := 0
-	for _, line := range input {
-		policy, password, err := parse(line)
+	for _, row := range database {
+		policy, password, err := parse(row)
 		if err != nil {
 			return 0, 0, err
 		}
@@ -61,13 +61,13 @@ func Solve(stream io.Reader) (int, int, error) {
 	return validCount, strictlyValidCount, nil
 }
 
-type policy struct {
+type passwordPolicy struct {
 	target rune
 	min    int
 	max    int
 }
 
-func (p policy) isValid(password string) bool {
+func (p passwordPolicy) isValid(password string) bool {
 	count := 0
 
 	for _, letter := range password {
@@ -79,14 +79,14 @@ func (p policy) isValid(password string) bool {
 	return count >= p.min && count <= p.max
 }
 
-func (p policy) isStrictlyValid(password string) bool {
+func (p passwordPolicy) isStrictlyValid(password string) bool {
 	first := rune(password[p.min-1])
 	second := rune(password[p.max-1])
 
 	return (first == p.target) != (second == p.target)
 }
 
-func parse(input string) (*policy, string, error) {
+func parse(input string) (*passwordPolicy, string, error) {
 	parts := strings.Split(input, " ")
 
 	target := rune(parts[1][0])
@@ -99,5 +99,5 @@ func parse(input string) (*policy, string, error) {
 		return nil, "", err
 	}
 
-	return &policy{target: target, min: min, max: max}, parts[2], nil
+	return &passwordPolicy{target: target, min: min, max: max}, parts[2], nil
 }

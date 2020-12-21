@@ -9,7 +9,7 @@ import (
 )
 
 func TestSolveInvalidMinCharacter(t *testing.T) {
-	stream := input.FromLiteral("a-3 a: abcde\n1-3 b: cdefg\n")
+	stream := input.FromLiteral("abc-3 a: abcde\n1-3 b: cdefg\n2-9 c: ccccccccc")
 
 	solution1, solution2, err := Solve(stream)
 
@@ -19,7 +19,7 @@ func TestSolveInvalidMinCharacter(t *testing.T) {
 }
 
 func TestSolveInvalidMaxCharacter(t *testing.T) {
-	stream := input.FromLiteral("1-a a: abcde\n1-3 b: cdefg\n")
+	stream := input.FromLiteral("1-abc a: abcde\n1-3 b: cdefg\n2-9 c: ccccccccc")
 
 	solution1, solution2, err := Solve(stream)
 
@@ -29,11 +29,11 @@ func TestSolveInvalidMaxCharacter(t *testing.T) {
 }
 
 func TestSolve(t *testing.T) {
-	stream := input.FromLiteral("1-3 a: abcde\n1-3 b: cdefg\n1-3 a: abcde\n1-3 b: cdefg\n1-3 c: cccccc")
+	stream := input.FromLiteral("1-3 a: abcde\n1-3 b: cdefg\n2-9 c: ccccccccc")
 
 	solution1, solution2, err := Solve(stream)
 
 	assert.Equal(t, 2, solution1, "Solution 1 should be 2")
-	assert.Equal(t, 2, solution2, "Solution 2 should be 2")
+	assert.Equal(t, 1, solution2, "Solution 2 should be 1")
 	assert.Nil(t, err, "Error should be nil")
 }
