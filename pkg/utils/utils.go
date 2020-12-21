@@ -20,12 +20,12 @@ func HasPair(input []int, target int) bool {
 func FindPair(input []int, target int) (int, int, error) {
 	cache := map[int]int{}
 
-	for index, value := range input {
-		if index, ok := cache[value]; ok {
-			return input[index], value, nil
+	for i, value := range input {
+		if i, ok := cache[value]; ok {
+			return input[i], value, nil
 		}
 
-		cache[target-value] = index
+		cache[target-value] = i
 	}
 
 	return 0, 0, fmt.Errorf("pair that sums up to %d not found", target)
@@ -54,4 +54,22 @@ func FindTriple(input []int, target int) (int, int, int, error) {
 	}
 
 	return 0, 0, 0, fmt.Errorf("triple that sums up to %d not found", target)
+}
+
+// FindMinMax is used to find the minimum value and the maximum value in a slice
+// of integers. This function takes a slice of integers as input. It returns two
+// integers.
+func FindMinMax(input []int) (int, int) {
+	min, max := 0, 0
+
+	for _, value := range input {
+		if value > max {
+			max = value
+		}
+		if min == 0 || value < min {
+			min = value
+		}
+	}
+
+	return min, max
 }

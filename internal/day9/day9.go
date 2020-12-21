@@ -1,7 +1,6 @@
 package day9
 
 import (
-	"errors"
 	"io"
 
 	log "github.com/sirupsen/logrus"
@@ -9,6 +8,7 @@ import (
 
 	"github.com/tomdewildt/advent-of-code-2020/pkg/cli"
 	"github.com/tomdewildt/advent-of-code-2020/pkg/input"
+	"github.com/tomdewildt/advent-of-code-2020/pkg/utils"
 )
 
 // AddCommandTo is used to add the command that exectutes the Solve function to
@@ -22,7 +22,7 @@ func AddCommandTo(cmd *cobra.Command) {
 			log.Fatalf("cannot load: %v", err)
 		}
 
-		solution1, solution2, err := Solve(stream)
+		solution1, solution2, err := Solve(stream, 25)
 		if err != nil {
 			log.Fatalf("cannot solve: %v", err)
 		}
@@ -32,31 +32,31 @@ func AddCommandTo(cmd *cobra.Command) {
 	})
 }
 
-// Solve is used to find the solution to the problem. This function takes an stream
-// of type io.Reader as input. It returns two integers and nil or 0, 0 and an error
-// if one occurred.
-func Solve(stream io.Reader) (int, int, error) {
-	input, err := input.ToIntSlice(stream)
+// Solve is used to find the solution to the problem. This function takes a stream
+// of type io.Reader and the preamble as input. It returns two integers and nil or
+// 0, 0 and an error if one occurred.
+func Solve(stream io.Reader, preamble int) (int, int, error) {
+	numbers, err := input.ToIntSlice(stream)
 	if err != nil {
 		return 0, 0, err
 	}
 
 	invalidValue := 0
-	for index, value := range input {
-		if index >= 25 {
-			if _, _, err := findPair(input[index-25:index], value); err != nil {
-				invalidValue = value
+	for i, number := range numbers {
+		if i >= preamble {
+			if ok := utils.HasPair(numbers[i-preamble:i], number); !ok {
+				invalidValue = number
 			}
 		}
 	}
 
 	weaknessValue := 0
-	for i := 0; i < len(input)-1; i++ {
-		sum := input[i]
-		for j := i + 1; j < len(input); j++ {
-			sum += input[j]
+	for i := 0; i < len(numbers)-1; i++ {
+		sum := numbers[i]
+		for j := i + 1; j < len(numbers); j++ {
+			sum += numbers[j]
 			if sum == invalidValue {
-				min, max := findMinMax(input[i : j+1])
+				min, max := utils.FindMinMax(numbers[i : j+1])
 				weaknessValue = min + max
 				break
 			} else if sum > invalidValue {
@@ -66,33 +66,4 @@ func Solve(stream io.Reader) (int, int, error) {
 	}
 
 	return invalidValue, weaknessValue, nil
-}
-
-func findPair(input []int, target int) (int, int, error) {
-	cache := map[int]int{}
-
-	for index, value := range input {
-		if index, ok := cache[value]; ok {
-			return input[index], value, nil
-		}
-
-		cache[target-value] = index
-	}
-
-	return 0, 0, errors.New("pair not found")
-}
-
-func findMinMax(input []int) (int, int) {
-	min, max := 0, 0
-
-	for _, value := range input {
-		if value > max {
-			max = value
-		}
-		if min == 0 || value < min {
-			min = value
-		}
-	}
-
-	return min, max
 }
