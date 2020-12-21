@@ -31,33 +31,33 @@ func AddCommandTo(cmd *cobra.Command) {
 	})
 }
 
-// Solve is used to find the solution to the problem. This function takes an stream
+// Solve is used to find the solution to the problem. This function takes a stream
 // of type io.Reader as input. It returns two integers and nil or 0, 0 and an error
 // if one occurred.
 func Solve(stream io.Reader) (int, int, error) {
-	input, err := input.ToTileMap(stream)
+	tileMap, err := input.ToTileMap(stream)
 	if err != nil {
 		return 0, 0, err
 	}
 
-	count1 := traverseMap(input, 1, 1, '#')
-	count2 := traverseMap(input, 3, 1, '#')
-	count3 := traverseMap(input, 5, 1, '#')
-	count4 := traverseMap(input, 7, 1, '#')
-	count5 := traverseMap(input, 1, 2, '#')
+	count1 := traverse(tileMap, 1, 1, '#')
+	count2 := traverse(tileMap, 3, 1, '#')
+	count3 := traverse(tileMap, 5, 1, '#')
+	count4 := traverse(tileMap, 7, 1, '#')
+	count5 := traverse(tileMap, 1, 2, '#')
 
 	return count2, (count1 * count2 * count3 * count4 * count5), nil
 }
 
-func traverseMap(input [][]rune, dx int, dy int, char rune) int {
-	width := len(input[0])
-	height := len(input)
+func traverse(tileMap [][]rune, dx int, dy int, char rune) int {
+	width := len(tileMap[0])
+	height := len(tileMap)
 	count := 0
 	x := 0
 	y := 0
 
 	for y < height {
-		if input[y][x%width] == char {
+		if tileMap[y][x%width] == char {
 			count++
 		}
 
