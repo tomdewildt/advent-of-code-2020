@@ -34,17 +34,17 @@ func AddCommandTo(cmd *cobra.Command) {
 	})
 }
 
-// Solve is used to find the solution to the problem. This function takes an stream
+// Solve is used to find the solution to the problem. This function takes a stream
 // of type io.Reader as input. It returns two integers and nil or 0, 0 and an error
 // if one occurred.
 func Solve(stream io.Reader) (int, int, error) {
-	input, err := input.ToStringSlice(stream)
+	code, err := input.ToStringSlice(stream)
 	if err != nil {
 		return 0, 0, err
 	}
 
 	instructions := []instruction{}
-	for _, line := range input {
+	for _, line := range code {
 		instruction, err := parse(line)
 		if err != nil {
 			return 0, 0, err
@@ -116,13 +116,13 @@ func process(instructions []instruction) (int, bool, error) {
 }
 
 func fix(instructions []instruction) (int, error) {
-	for index, instruction := range instructions {
+	for i, instruction := range instructions {
 		original := instruction.operation
 
 		if instruction.operation == "jmp" {
-			instructions[index].operation = "nop"
+			instructions[i].operation = "nop"
 		} else if instruction.operation == "nop" {
-			instructions[index].operation = "jmp"
+			instructions[i].operation = "jmp"
 		}
 
 		accumulator, halted, err := process(instructions)
@@ -134,7 +134,7 @@ func fix(instructions []instruction) (int, error) {
 			return accumulator, nil
 		}
 
-		instructions[index].operation = original
+		instructions[i].operation = original
 	}
 
 	return 0, nil
