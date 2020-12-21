@@ -32,28 +32,28 @@ func AddCommandTo(cmd *cobra.Command) {
 	})
 }
 
-// Solve is used to find the solution to the problem. This function takes an stream
+// Solve is used to find the solution to the problem. This function takes a stream
 // of type io.Reader as input. It returns two integers and nil or 0, 0 and an error
 // if one occurred.
 func Solve(stream io.Reader) (int, int, error) {
-	input, err := input.ToGroupedStringSlice(stream)
+	questionnaire, err := input.ToGroupedStringSlice(stream)
 	if err != nil {
 		return 0, 0, err
 	}
 
 	answeredYes := 0
 	answeredAllYes := 0
-	for _, group := range input {
+	for _, questions := range questionnaire {
 		answers := map[rune]int{}
 
-		for _, answer := range group {
+		for _, answer := range questions {
 			if answer != ' ' {
 				answers[answer]++
 			}
 		}
 		answeredYes += len(answers)
 
-		size := strings.Count(group, " ") + 1
+		size := strings.Count(questions, " ") + 1
 		for _, count := range answers {
 			if count == size {
 				answeredAllYes++
