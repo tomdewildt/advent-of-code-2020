@@ -34,17 +34,17 @@ func AddCommandTo(cmd *cobra.Command) {
 	})
 }
 
-// Solve is used to find the solution to the problem. This function takes an stream
+// Solve is used to find the solution to the problem. This function takes a stream
 // of type io.Reader as input. It returns two integers and nil or 0, 0 and an error
 // if one occurred.
 func Solve(stream io.Reader) (int, int, error) {
-	input, err := input.ToStringSlice(stream)
+	manifest, err := input.ToStringSlice(stream)
 	if err != nil {
 		return 0, 0, err
 	}
 
 	seats := []int{}
-	for _, line := range input {
+	for _, line := range manifest {
 		seat, err := parse(line)
 		if err != nil {
 			return 0, 0, err
@@ -64,10 +64,10 @@ func Solve(stream io.Reader) (int, int, error) {
 	return seats[len(seats)-1], seat, nil
 }
 
-func parse(input string) (int, error) {
+func parse(seat string) (int, error) {
 	replacer := strings.NewReplacer("F", "0", "B", "1", "L", "0", "R", "1")
 
-	result, err := strconv.ParseInt(replacer.Replace(input), 2, 64)
+	result, err := strconv.ParseInt(replacer.Replace(seat), 2, 64)
 	if err != nil {
 		return 0, err
 	}

@@ -8,7 +8,7 @@ import (
 	"github.com/tomdewildt/advent-of-code-2020/pkg/input"
 )
 
-func TestSolveInvalidLine(t *testing.T) {
+func TestSolveInvalidSeat(t *testing.T) {
 	stream := input.FromLiteral("ABCDEFGHIJ\nFFFBBFFRRL\nFFFBBFBLLL\nFFFBBFBLLR\n")
 
 	solution1, solution2, err := Solve(stream)
