@@ -89,3 +89,12 @@ func TestFindTriple(t *testing.T) {
 	assert.Equal(t, 10, value3, "Value 3 should be 10")
 	assert.Nil(t, err, "Error should be nil")
 }
+
+func TestFindMinMax(t *testing.T) {
+	input := []int{40, 80, 50, 70, 10, 20, 90, 30, 60, 100}
+
+	min, max := FindMinMax(input)
+
+	assert.Equal(t, 10, min, "Min should be 10")
+	assert.Equal(t, 100, max, "Max should be 100")
+}
