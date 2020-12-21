@@ -8,8 +8,18 @@ import (
 	"github.com/tomdewildt/advent-of-code-2020/pkg/input"
 )
 
+const instructions = `nop +0
+acc +1
+jmp +4
+acc +3
+jmp -3
+acc -99
+acc +1
+jmp -4
+acc +6`
+
 func TestSolveInvalidInstruction(t *testing.T) {
-	stream := input.FromLiteral("nop +0\nacc +1\njmp +2\nnop +0\nnop +0\njmp -4\nabc +1")
+	stream := input.FromLiteral("abc +1")
 
 	solution1, solution2, err := Solve(stream)
 
@@ -19,7 +29,7 @@ func TestSolveInvalidInstruction(t *testing.T) {
 }
 
 func TestSolveInvalidArgument(t *testing.T) {
-	stream := input.FromLiteral("nop +0\nacc +1\njmp +2\nnop +0\nnop +0\njmp -4\nacc abc")
+	stream := input.FromLiteral("acc abc")
 
 	solution1, solution2, err := Solve(stream)
 
@@ -29,11 +39,11 @@ func TestSolveInvalidArgument(t *testing.T) {
 }
 
 func TestSolve(t *testing.T) {
-	stream := input.FromLiteral("nop +0\nacc +1\njmp +2\nnop +0\nnop +0\njmp -4\nacc +1")
+	stream := input.FromLiteral(instructions)
 
 	solution1, solution2, err := Solve(stream)
 
-	assert.Equal(t, 1, solution1, "Solution 1 should be 1")
-	assert.Equal(t, 2, solution2, "Solution 2 should be 2")
+	assert.Equal(t, 5, solution1, "Solution 1 should be 5")
+	assert.Equal(t, 8, solution2, "Solution 2 should be 8")
 	assert.Nil(t, err, "Error should be nil")
 }
