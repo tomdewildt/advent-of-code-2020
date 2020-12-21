@@ -32,52 +32,52 @@ func AddCommandTo(cmd *cobra.Command) {
 	})
 }
 
-// Solve is used to find the solution to the problem. This function takes an stream
+// Solve is used to find the solution to the problem. This function takes a stream
 // of type io.Reader as input. It returns two integers and nil or 0, 0 and an error
 // if one occurred.
 func Solve(stream io.Reader) (int, int, error) {
-	input, err := input.ToIntSlice(stream)
+	adapters, err := input.ToIntSlice(stream)
 	if err != nil {
 		return 0, 0, err
 	}
-	sort.Ints(input)
+	sort.Ints(adapters)
 
 	diff1 := 0
 	diff3 := 1
 	prev := 0
-	for _, value := range input {
-		delta := value - prev
+	for _, adapter := range adapters {
+		delta := adapter - prev
 		if delta == 3 {
 			diff3++
 		} else if delta == 1 {
 			diff1++
 		}
 
-		prev = value
+		prev = adapter
 	}
 
-	input = append([]int{0}, input...)
-	permutations := permute(input, map[int]int{})
+	adapters = append([]int{0}, adapters...)
+	permutations := permute(adapters, map[int]int{})
 
 	return diff1 * diff3, permutations, nil
 }
 
-func permute(input []int, lookup map[int]int) int {
-	if len(input) == 1 {
+func permute(adapters []int, lookup map[int]int) int {
+	if len(adapters) == 1 {
 		return 1
 	}
 
-	if count, ok := lookup[input[0]]; ok {
+	if count, ok := lookup[adapters[0]]; ok {
 		return count
 	}
 
 	count := 0
-	for i := 1; i < len(input); i++ {
-		if input[i]-input[0] <= 3 {
-			count += permute(input[i:], lookup)
+	for i := 1; i < len(adapters); i++ {
+		if adapters[i]-adapters[0] <= 3 {
+			count += permute(adapters[i:], lookup)
 		}
 	}
-	lookup[input[0]] = count
+	lookup[adapters[0]] = count
 
 	return count
 }

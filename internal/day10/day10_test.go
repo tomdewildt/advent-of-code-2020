@@ -8,8 +8,8 @@ import (
 	"github.com/tomdewildt/advent-of-code-2020/pkg/input"
 )
 
-func TestSolveInvalidStream(t *testing.T) {
-	stream := input.FromLiteral("abc\n20\n30\n40\n50\n")
+func TestSolveInvalidAdapter(t *testing.T) {
+	stream := input.FromLiteral("abc")
 
 	solution1, solution2, err := Solve(stream)
 
@@ -19,7 +19,7 @@ func TestSolveInvalidStream(t *testing.T) {
 }
 
 func TestSolve(t *testing.T) {
-	stream := input.FromLiteral("16\n10\n15\n5\n1\n11\n7\n19\n6\n12\n4\n")
+	stream := input.FromLiteral("16\n10\n15\n5\n1\n11\n7\n19\n6\n12\n4")
 
 	solution1, solution2, err := Solve(stream)
 
