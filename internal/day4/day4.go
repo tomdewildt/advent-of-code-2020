@@ -34,24 +34,24 @@ func AddCommandTo(cmd *cobra.Command) {
 	})
 }
 
-// Solve is used to find the solution to the problem. This function takes an stream
+// Solve is used to find the solution to the problem. This function takes a stream
 // of type io.Reader as input. It returns two integers and nil or 0, 0 and an error
 // if one occurred.
 func Solve(stream io.Reader) (int, int, error) {
-	input, err := input.ToGroupedStringSlice(stream)
+	file, err := input.ToGroupedStringSlice(stream)
 	if err != nil {
 		return 0, 0, err
 	}
 
 	validCount := 0
 	strictlyValidCount := 0
-	for _, line := range input {
-		passport := parse(line)
+	for _, group := range file {
+		p := parse(group)
 
-		if passport.isValid() {
+		if p.isValid() {
 			validCount++
 		}
-		if passport.isStrictlyValid() {
+		if p.isStrictlyValid() {
 			strictlyValidCount++
 		}
 	}
