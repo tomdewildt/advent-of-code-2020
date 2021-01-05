@@ -11,7 +11,7 @@ Solutions for the [Advent of Code 2020](https://adventofcode.com/2020) problems 
 # How To Run
 
 Prerequisites:
-* go version ```1.13``` or later
+* go version ```1.15``` or later
 
 ### Development
 
