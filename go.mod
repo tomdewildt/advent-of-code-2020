@@ -1,6 +1,6 @@
 module github.com/tomdewildt/advent-of-code-2020
 
-go 1.15
+go 1.18
 
 require (
 	github.com/sirupsen/logrus v1.9.0
