@@ -4,10 +4,6 @@
 NAMESPACE := tomdewildt
 NAME := advent-of-code-2020
 
-CMD := cmd/advent-of-code-2020/advent-of-code-2020.go
-DAY := 10
-FILE := ./assets/day10/day10.txt
-
 help: ## Show this help
 	@echo "${NAMESPACE}/${NAME}"
 	@echo
@@ -25,7 +21,10 @@ clean: ## Clean the environment
 ##
 
 run: ## Run the tool
-	go run -ldflags "-X main.Name=${NAME} -X main.Version=0.0.0" ${CMD} ${DAY} -f ${FILE}
+	go run \
+		-ldflags "-X main.Name=${NAME} -X main.Version=0.0.0" \
+		cmd/advent-of-code-2020/advent-of-code-2020.go ${day} \
+		-f ./assets/day10/day${day}.txt
 
 test: ## Run tests
 	go test ./... 
@@ -33,7 +32,10 @@ test: ## Run tests
 ##
 
 build: ## Build the tool
-	go build -o ${NAME} -ldflags "-X main.Name=${NAME} -X main.Version=0.0.0" ${CMD}
+	go build \
+		-o ${NAME} \
+		-ldflags "-X main.Name=${NAME} -X main.Version=0.0.0" \
+		cmd/advent-of-code-2020/advent-of-code-2020.go
 
 ##
 
