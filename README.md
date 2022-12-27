@@ -1,7 +1,7 @@
 # Advent of Code 2020
 [![Version](https://img.shields.io/github/v/release/tomdewildt/advent-of-code-2020?label=version)](https://github.com/tomdewildt/advent-of-code-2020/releases)
-[![Build](https://img.shields.io/github/workflow/status/tomdewildt/advent-of-code-2020/ci/master)](https://github.com/tomdewildt/advent-of-code-2020/actions?query=workflow%3Aci)
-[![Release](https://img.shields.io/github/workflow/status/tomdewildt/advent-of-code-2020/cd?label=release)](https://github.com/tomdewildt/advent-of-code-2020/actions?query=workflow%3Acd)
+[![Build](https://img.shields.io/github/actions/workflow/status/tomdewildt/advent-of-code-2020/ci.yml?branch=master)](https://github.com/tomdewildt/advent-of-code-2020/actions/workflows/ci.yml)
+[![Release](https://img.shields.io/github/actions/workflow/status/tomdewildt/advent-of-code-2020/cd.yml?label=release)](https://github.com/tomdewildt/advent-of-code-2020/actions/workflows/cd.yml)
 [![Coverage](https://img.shields.io/codecov/c/gh/tomdewildt/advent-of-code-2020)](https://codecov.io/gh/tomdewildt/advent-of-code-2020)
 [![Report](https://goreportcard.com/badge/github.com/tomdewildt/advent-of-code-2020)](https://goreportcard.com/report/github.com/tomdewildt/advent-of-code-2020)
 [![License](https://img.shields.io/github/license/tomdewildt/advent-of-code-2020)](https://github.com/tomdewildt/advent-of-code-2020/blob/master/LICENSE)
